@@ -1,0 +1,73 @@
+.our-team {
+    background-color: #f7f7f7;
+}
+
+.our-team-content {
+    margin: 50px;
+}
+
+.our-team-content h1 {
+    color: #383838;
+    font-family: "Playfair Display", serif;
+    font-weight: 600;
+    font-size: 51px;
+    text-align: center;
+}
+
+.our-team-content h6 {
+    color: #747474;
+    font-family: "Jost", sans-serif;
+    font-style: italic;
+    font-size: 15px;
+    letter-spacing: .5px;
+    margin: 20px 0px 20px;
+}
+
+.our-board-content .row .col-md-4 .card {
+    border: none;
+    margin: 20px;
+
+}
+
+.our-board .our-board-content .row .col-md-4 .card .card-body img {
+    /* margin: -20px; */
+    object-fit: contain;
+    max-width: 100%;
+    height: auto;
+}
+
+.our-board .our-board-content .row .col-md-4 .card .card-body h4 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.our-board .our-board-content .row .col-md-4 .card .card-body h4 a {
+
+    text-decoration: none;
+    font-family: "Playfair dipslay", serif;
+    font-weight: 700;
+    color: #000;
+    font-size: 29px;
+    margin-top: 30px;
+}
+
+.slider-staff {
+    background-color: #f7f7f7;
+}
+
+.our-board-content h1 {
+    color: #383838;
+    font-family: "Playfair Display", serif;
+    font-weight: 600;
+    font-size: 51px;
+    text-align: center;
+}
+
+.our-board-content h6 {
+    color: #747474;
+    font-family: "Jost", sans-serif;
+    font-style: italic;
+    font-size: 15px;
+    letter-spacing: .5px;
+    margin: 20px 0px 20px;
+}

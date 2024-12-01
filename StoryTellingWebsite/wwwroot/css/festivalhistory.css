@@ -1,0 +1,187 @@
+.festival-schedule {
+    background-image: url("/images/festival-schefule-hero-img.png");
+    /*backdrop-filter: blur (5px);*/
+    width: 100%;
+    /* min-height: 70vh; */
+    /*border-color: blur(5px);*/
+    object-fit: inherit;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.festival-schedule-content h2 {
+    text-align: center;
+    justify-content: center;
+    position: relative;
+    /*z-index: 200;*/
+    font-family: "Playfair dipslay", serif;
+    font-weight: 700;
+    color: #fff;
+    font-size: 49px;
+    margin-top: 80px;
+}
+
+.festival-history-content h2 {
+    font-family: "Playfair display", serif;
+    font-size: 40px;
+    font-weight: 600;
+    text-align: center;
+    color: #000;
+    word-spacing: 2px;
+    margin: 20px;
+}
+
+.festival-history-content p {
+    font-family: "Jost", sans-serif;
+    font-size: 16px;
+    color: #747474;
+    word-spacing: 2px;
+}
+
+.history-caption img {
+    width: 100%;
+}
+
+.history-caption p {
+    margin: 10px;
+    font-family: "Jost", sans-serif;
+    font-size: 13px;
+    color: #97006E;
+    font-style: italic;
+    font-weight: 600;
+    word-spacing: 0.5px;
+
+
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-between; */
+    gap: 30px;
+}
+
+.flex-container h3 {
+    font-family: "Jost", sans-serif;
+    font-size: 24px;
+    color: #000;
+    font-weight: 500;
+    word-spacing: 0.5px;
+}
+
+.flex-container p {
+    font-family: "Jost", sans-serif;
+    font-size: 13px;
+    color: #97006E;
+    font-style: italic;
+    font-weight: 600;
+    word-spacing: 0.5px;
+}
+
+.flex-wrap img {
+    display: flex;
+    flex-direction: row;
+    flex-flow: column wrap;
+    flex-wrap: wrap;
+    width: 20%;
+
+}
+
+.schedule-heading h3 {
+    text-align: center;
+    color: #0000cd;
+    font-family: "Jost", sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+
+}
+
+.schedule-heading h4 {
+    text-align: left;
+    color: #000;
+    font-family: "Jost", sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.spacing {
+    margin: 40px;
+}
+
+.schedule-theatre img {
+    float: left;
+    margin-right: 0;
+    width: 60px;
+}
+
+.schedule-people {
+    /* display: inline-flex; */
+    text-align: right;
+}
+
+.schedule-people img {
+    display: inline-flex;
+    margin: 0px auto;
+    height: auto;
+    width: 20%;
+    margin: 0 29px 0 -20%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    border-radius: 50%;
+}
+
+.icons {
+    color: #50d6ae;
+    font-family: "Jost", sans-serif;
+    font-size: 18px;
+    margin: 0px 0px 18px;
+    display: block;
+}
+
+.special-events-btn {
+    font-family: "Playfair Display", serif;
+    font-size: 20px;
+    color: #fff;
+    background-color: #0000cd;
+    border: 1.5px solid #fff;
+    padding: 14px 40px 16px;
+    font-weight: bold;
+    display: inline;
+    max-width: 150px;
+    margin: 0 3px;
+    margin-top: 35px;
+    text-decoration: none;
+}
+
+.special-events-people {
+    text-align: center;
+    /* display: flex; */
+}
+
+.special-events-people p {
+    text-align: left;
+    font-weight: 600;
+    font-size: 15px;
+    color: #0000cd;
+}
+
+.special-events-people img {
+    display: inline-flex;
+    margin: 0px auto;
+    height: auto;
+    width: 16%;
+    margin: 0 65px 0 -20%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    border-radius: 50%;
+}

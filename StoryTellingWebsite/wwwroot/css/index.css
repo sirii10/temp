@@ -1,0 +1,230 @@
+section {
+    margin: 0;
+    padding: 40px;
+}
+
+
+
+.container-fluid {
+    padding-right: 0;
+    padding-left: 0;
+    margin-right: auto;
+    margin-left: auto;
+    overflow-x: hidden;
+
+}
+
+/* .isc-main {
+    background-image: url("/images/StoryTelling_Center.png");
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    object-fit: inherit;
+    height: 400px;
+    text-align: center;
+} */
+
+.isc-main {
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    object-fit: inherit;
+    text-align: center;
+}
+
+.isc-main h2 {
+    text-align: center;
+    position: relative;
+    font-family: "Jost", sans-serif;
+    color: #7fffd4;
+    font-size: 35px;
+    font-weight: bold;
+    /* top: 19%; */
+
+}
+
+.isc-main h3 {
+    text-align: center;
+    position: relative;
+    color: white;
+    font-family: "Playfair Display", serif;
+    font-size: 60px;
+    font-weight: bold;
+    /* top: 15%; */
+}
+
+.isc-main h4 {
+    text-align: center;
+    position: relative;
+    color: white;
+    font-family: "Playfair Display", serif;
+    font-size: 45px;
+    font-weight: bold;
+    /* top: 15%; */
+}
+
+.register-now-btn {
+    align-items: center;
+    font-family: "Jost", sans-serif;
+    font-size: 17px;
+    color: #fff;
+    border: 1.5px solid #fff;
+    padding: 14px 33px 16px;
+    border-radius: 55px;
+    font-weight: bold;
+    display: inline-block;
+    max-width: 200px;
+    margin: 0 auto;
+    margin-top: 35px;
+    text-decoration: none;
+}
+
+section h2 {
+    font-size: 39px;
+    font-family: "Playfair Display", serif;
+    color: #0a0a0a;
+    font-weight: bold;
+    margin: 10px 0px 10px;
+}
+
+iframe {
+    border-top: 2px solid #0000cd;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.stories-section .card {
+    margin-top: 30px;
+    padding: 15px 20px 30px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 0%;
+    border-top: 2px solid #0000cd;
+
+}
+
+.stories-section .card-title {
+    color: #333333;
+    font-family: "Playfair Display", serif;
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.stories-section .card-text {
+    color: #333333;
+    font-family: "Jost", sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.register-button {
+    text-align: center;
+
+}
+
+.register-for-more-btn {
+    font-family: "Jost", sans-serif;
+    font-size: 17px;
+    color: #fff;
+    background-image: linear-gradient(#9DE09D, #1F9E1F);
+    /* border: 1.5px solid #fff; */
+    padding: 14px 33px 16px;
+    border-radius: 55px;
+    font-weight: bold;
+    display: inline-block;
+    max-width: 300px;
+    margin: 0 auto;
+    margin-top: 35px;
+    text-decoration: none;
+}
+
+.performances-section {
+    margin-top: 30px;
+    background-color: #f7f7f7;
+}
+
+.performances-section p {
+    color: #333333;
+    font-family: "Jost", sans-serif;
+    font-size: 18px;
+    letter-spacing: 1px;
+    font-weight: 500;
+}
+
+.festival-sections {
+    margin-top: 30px;
+    text-align: center;
+}
+
+
+.festival-sections p {
+    color: #333333;
+    font-family: "Jost", sans-serif;
+    font-size: 18px;
+    letter-spacing: 1px;
+    font-weight: 500;
+    margin: 30px;
+}
+
+.festival-blogs-sections {
+    background-color: #f7f7f7;
+    text-align: left;
+    padding: 20px 20px;
+}
+
+.festival-blogs-sections .card {
+    margin-top: 30px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 0%;
+    border-top: 2px solid #0000cd;
+}
+
+.festival-blogs-sections .card-title {
+    color: #333333;
+    font-family: "Playfair Display", serif;
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.festival-blogs-sections .card-text {
+    color: #333333;
+    font-family: "Jost", sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.festival-blogs-sections .card-body h6 {
+    color: #1F9E1F;
+    font-style: italic;
+    font-family: "Jost", sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.sign-up-section {
+    text-align: center;
+}
+
+.input-newsletter {
+    display: flex;
+    justify-content: center;
+
+}
+
+.input-newsletter input {
+    width: 30%;
+    background-color: #fff;
+    border: none;
+    border-radius: 0;
+    box-shadow: 0 0px 0px 0 #7fffd4, 0 2px 10px 0 #7fffd4;
+    padding: 20px 10px;
+    font-size: 14px;
+}
+
+.input-newsletter button {
+    width: 10%;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 0;
+    box-shadow: 0 0px 0px 0 #7fffd4, 0 2px 10px 0 #7fffd4;
+    font-size: 12px;
+}

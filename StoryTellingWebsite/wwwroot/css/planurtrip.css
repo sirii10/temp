@@ -1,0 +1,141 @@
+.planurtrip-schedule {
+    background-image: url("/images/planurtrip.png");
+    /*backdrop-filter: blur (5px);*/
+    width: 100%;
+    text-align: center;
+    /* min-height: 70vh; */
+    /*border-color: blur(5px);*/
+    object-fit: inherit;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.planurtrip-schedule-content h2 {
+    text-align: center;
+    justify-content: center;
+    position: relative;
+    /*z-index: 200;*/
+    font-family: "Playfair dipslay", serif;
+    font-weight: 700;
+    color: #fff;
+    font-size: 49px;
+    margin-top: 80px;
+}
+
+.planurtrip-content h2 {
+    text-align: center;
+    justify-content: center;
+    position: relative;
+    /*z-index: 200;*/
+    font-family: "Playfair dipslay", serif;
+    font-weight: 700;
+    color: rgb(221, 153, 51);
+    font-size: 49px;
+    margin-top: 50px;
+}
+
+.planurtrip-content p {
+    margin-top: 30px;
+    color: #3f403f;
+    font-family: "Jost", sans-serif;
+    font-size: 18px;
+    word-spacing: 1px;
+    letter-spacing: 0.5px;
+}
+
+.pyt-btn {
+    display: flex;
+    margin-bottom: 30px;
+
+}
+
+.group-tickets {
+    background-color: #f7f7f7;
+}
+
+.group-tickets h2 {
+    text-align: center;
+    justify-content: center;
+    position: relative;
+    /*z-index: 200;*/
+    font-family: "Playfair dipslay", serif;
+    font-weight: 700;
+    color: rgb(221, 153, 51);
+    font-size: 49px;
+    margin-top: 50px;
+}
+
+.group-tickets p {
+    margin-top: 30px;
+    color: #3f403f;
+    font-family: "Jost", sans-serif;
+    font-size: 17px;
+    font-weight: 500;
+    word-spacing: 1px;
+    letter-spacing: 0.5px;
+}
+
+.group-tickets h3 {
+    color: #3f403f;
+    font-family: "Jost", sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    word-spacing: 1px;
+    letter-spacing: 0.5px;
+}
+
+.group-tickets ul {
+    list-style-type: disc;
+    margin-left: 20px;
+    color: #3f403f;
+    font-family: "Jost", sans-serif;
+    font-size: 17px;
+    font-weight: 500;
+    word-spacing: 1px;
+    letter-spacing: 0.5px;
+}
+
+.group-tickets a {
+    color: #007bff;
+    text-decoration: none;
+    /* color: #3f403f; */
+    font-family: "Jost", sans-serif;
+    font-size: 17px;
+    font-weight: 500;
+    word-spacing: 1px;
+    letter-spacing: 0.5px;
+}
+
+.group-tickets a:hover {
+    text-decoration: underline;
+
+}
+
+.wheretostay-content h1 {
+    text-align: center;
+    justify-content: center;
+    position: relative;
+    /*z-index: 200;*/
+    font-family: "Playfair dipslay", serif;
+    font-weight: 700;
+    color: rgb(221, 153, 51);
+    font-size: 39px;
+    margin: 50px 0px 50px 0px;
+}
+
+.wheretostay-content h2 {
+    font-family: "Playfair dipslay", serif;
+    font-weight: 700;
+    color: #0c0c0c;
+    font-size: 39px;
+
+}
+
+.wheretostay-content p {
+    font-family: "Jost", sans-serif;
+    font-weight: 500;
+    color: #3f403f;
+    font-size: 16px;
+}

@@ -1,0 +1,72 @@
+.contact-main {
+    background-color: #f9f9f9;
+    padding: 60px;
+
+}
+
+.contact-us-form h2 {
+    font-family: "Playfair Display", serif;
+    font-weight: 700;
+    font-size: 40px;
+    color: #383833;
+}
+
+.contact-us-form h3 {
+    font-family: "Playfair Display", serif;
+    font-weight: 600;
+    font-size: 27px;
+    color: #383833;
+}
+
+.contact-us-form h4 {
+    font-family: "Jost", sans-serif;
+    font-weight: 500;
+    font-size: 17px;
+    color: #3f403f;
+    letter-spacing: 0.5px;
+    padding: 0px 0px 10px;
+}
+
+br {
+    content: "";
+    display: block;
+    margin-top: 10px;
+}
+
+.contact-us-form p {
+    padding: 20px 0px;
+    font-family: "Jost", sans-serif;
+    font-weight: 500;
+    font-size: 17px;
+    color: #3f403f;
+    letter-spacing: 0.5px;
+
+}
+
+.form-control {
+    border: none;
+    border-radius: 0;
+    padding: 20px;
+    border-bottom: solid #b8b5b5;
+    font-size: 17px;
+    background-color: #f9f9f9;
+
+}
+
+.submit-now-btn {
+    font-family: "Jost", sans-serif;
+    font-size: 13px;
+    color: #fff;
+    border: 1.5px solid #fff;
+    padding: 18px 33px;
+    background-color: #0000cd;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 5px;
+    font-weight: 700;
+    display: inline-block;
+    max-width: 200px;
+    margin: 0 auto;
+    margin-top: 35px;
+    text-decoration: none;
+}

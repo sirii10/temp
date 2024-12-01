@@ -1,0 +1,123 @@
+/* section {
+    padding: 150px 0px 0px 0px;
+} */
+
+.main-head h1 {
+    font-family: "Playfair Display", serif;
+    font-size: 65px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.main-head h6 {
+    font-family: "Playfair Display", serif;
+    font-size: 30px;
+    font-weight: normal;
+    color: #888888;
+}
+
+.main-video {
+    padding: 60px;
+}
+
+.main-video iframe {
+    display: block;
+    justify-content: center;
+    margin: 0 auto;
+
+}
+
+.body-p {
+    background-color: #f7f7f7;
+}
+
+.body-p h5 {
+    font-family: "playfair display", serif;
+    font-size: 31px;
+    font-weight: 700;
+    color: #0c0c0c;
+}
+
+.body-p .card {
+    border: none;
+    margin-top: 30px;
+    padding: 15px 20px 30px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 0%;
+    border-top: 2px solid #0000cd;
+}
+
+
+.body-p .card p {
+    color: #3f403f;
+    font-family: "Jost", sans-serif;
+    font-size: 17px;
+
+}
+
+.body-p .card a {
+    color: #252525;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+.story-img {
+    padding: 10px 20px 0px 20px;
+}
+
+.story-img img {
+    width: 100%;
+    border-radius: 2%;
+}
+
+.collapse-layer p a {
+    text-decoration: none;
+    font-family: "Playfair Display", serif;
+    color: #0c0c0c;
+    font-size: 23px;
+    font-style: normal;
+    font-weight: 500;
+
+}
+
+
+.collapse-layer .card.card-body {
+    border: none;
+}
+
+.collapse-layer .card.card-body p {
+    color: #3f403f;
+    font-family: "Jost", sans-serif;
+    font-size: 17px;
+    word-spacing: 2px;
+    letter-spacing: 0.5px;
+}
+
+.our-history .container .row {
+    padding: 20px 0px;
+}
+
+.our-history .container .row .col-md-2 h6 {
+    color: #adadad;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    padding-top: 13px;
+}
+
+.our-history .container .row .col-md-10 h2 {
+    color: #0c0c0c;
+    font-family: "Playfair Display", serif;
+    font-size: 34px;
+    font-weight: 600;
+
+}
+
+.our-history .container .row .col-md-10 h4 {
+    font-size: 21px;
+    font-family: "Playfair Display", serif;
+    font-weight: 400;
+    font-style: italic;
+    letter-spacing: 0px;
+    color: #1c1c1c;
+}

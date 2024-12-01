@@ -1,0 +1,55 @@
+.featured-teller {
+    background-image: url("/images/page-title-bg-2.jpg");
+    backdrop-filter: blur (5px);
+    width: 100%;
+    /* min-height: 50vh; */
+    border-color: blur(5px);
+    object-fit: inherit;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.featured-teller-content h2 {
+    text-align: center;
+    justify-content: center;
+    position: relative;
+    font-family: "Playfair dipslay", serif;
+    font-weight: 700;
+    color: #fff;
+    font-size: 49px;
+    margin-top: 80px;
+}
+
+.ft {
+    background-color: #f7f7f7;
+}
+
+.ft-content .row .col-md-4 .card {
+    border: none;
+    margin: 20px;
+
+}
+
+.ft .ft-content .row .col-md-4 .card .card-body img {
+    /* margin: -20px; */
+    object-fit: contain;
+    max-width: 100%;
+    height: auto;
+}
+
+.ft .ft-content .row .col-md-4 .card .card-body h4 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.ft .ft-content .row .col-md-4 .card .card-body h4 a {
+
+    text-decoration: none;
+    font-family: "Playfair dipslay", serif;
+    font-weight: 700;
+    color: #000;
+    font-size: 29px;
+    margin-top: 30px;
+}
