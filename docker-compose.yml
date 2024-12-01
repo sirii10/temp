@@ -1,0 +1,31 @@
+version: '3.9'
+
+services:
+  blazorapp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=db;Database=isc_database;User=root;pwd=root;
+
+  
+  db:
+    image: mysql:8.0
+    container_name: mysql_db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: isc_database
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql # Persistent volume for database data
+      - ./db/init:/docker-entrypoint-initdb.d:ro # Initialization scripts for the first run
+    restart: unless-stopped
+
+volumes:
+  mysql_data:

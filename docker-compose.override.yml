@@ -1,0 +1,6 @@
+﻿version: '3.9'
+
+services:
+  blazorapp:
+    environment:
+      - ConnectionStrings__isc=server=db;port=3306;database=isc_database;uid=root;pwd=root
