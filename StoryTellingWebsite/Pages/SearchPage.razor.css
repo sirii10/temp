@@ -1,0 +1,54 @@
+﻿﻿.searchBox .container {
+    /* border: #a9adac;
+    box-shadow: 0px2px2px2pxrgb(239, 237, 237); */
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.searchBox p {
+    padding-top: 15px;
+    font-family: "Jost" sans-serif;
+    font-size: 17px;
+    color: #3F403F;
+    margin: 0px 0px 20px;
+    font-weight: normal;
+}
+
+.link
+{
+    color:black;
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+    float: left;
+}
+
+.left {
+    width: 25%;
+    background-color: #2c3e50;
+}
+
+.right {
+    width: 75%;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.search-sidebar {
+    position:sticky;
+    width: stretch;
+    
+}
+
+.search-sidebar h3{
+    color: #ffffff;
+    
+}
+
+.search-results {
+}

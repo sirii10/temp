@@ -1,0 +1,102 @@
+@using StoryTellingWebsite.Authentication
+@inject AuthenticationStateProvider authStateProvider
+@inject NavigationManager navManager
+<div class="navbar" xmlns="http://www.w3.org/1999/html">
+    <div class="navbar-logo">
+        <a href="/"><img src="images/storytellers-logo_old.png" alt=""></a>
+
+    </div>
+    <div class="navbar-right">
+        <div class="dropdown">
+            <a href="/about-us" class="dropbtn">About Us</a>
+            <div class="dropdown-content">
+                <a href="/our-stories">Our Stories</a>
+                <a href="/our-vision">Our Vision</a>
+                <a href="/visit-us">Visit Us</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="/festival" class="dropbtn">Festival</a>
+            <div class="dropdown-content">
+                <a href="/festival-history">Festival History</a>
+                <a href="/initiatives">50 Years & Forward</a>
+                @* <a href="/plan-your-trip">Plan Your Trip</a> *@
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="/archives" class="dropbtn">Archives</a>
+            <div class="dropdown-content">
+                <a href="/featured-tellers">Featured Teller</a>
+                <a href="/audio-stories">Audio Stories</a>
+                <a href="/video-stories">Video Stories</a>
+                <a href="/festival-program-and-schedules">Festival Programs & Schedules</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="/contact-us" class="dropbtn">Contact Us</a>
+
+        </div>
+        <div class="dropdown">
+            <a class="dropbtn">Search</a>
+            <div class="dropdown-content">
+                <a href="/search">Advanced Search</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <AuthorizeView>
+                <Authorized>
+                    
+                </Authorized>
+                <NotAuthorized>
+                    <a href="/register" class="dropbtn">Register</a>
+                </NotAuthorized>
+            </AuthorizeView>
+
+        </div>
+        <div class="dropdown">
+            <AuthorizeView>
+                <Authorized>
+                    <div class="dropdown">
+                        <a class="dropbtn">Hello, @message</a>
+                        <div class="dropdown-content">
+                            <a href="/AdminPortal">Admin Portal</a>
+                            <a @onclick="Logout" href="javascript:void(0)">Logout</a>
+                        </div>
+                    </div>
+                    
+
+                </Authorized>
+                <NotAuthorized>
+                    <a href="/login" class="dropbtn">Login</a>
+                </NotAuthorized>
+            </AuthorizeView>
+            
+
+        </div>
+    </div>
+</div>
+
+@code
+{
+    [CascadingParameter]
+    private Task<AuthenticationState> authenticationState { get; set; }
+
+    string message = "";
+    
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await authenticationState;
+        if (authState != null && authState.User != null)
+        {
+            message = authState.User.Identity.Name;
+        }
+    }
+    private async Task Logout()
+    {
+        var customAuthStateProvider = (CustomAuthenticationStateProvider)authStateProvider;
+        await customAuthStateProvider.UpdateAuthenticationState(null);
+        navManager.NavigateTo("/", true);
+    }
+    
+    
+}

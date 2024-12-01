@@ -1,0 +1,201 @@
+.navbar {
+    overflow-x: hidden;
+    background-color: #bfbfbf;
+    border-bottom: #e6e6e6;
+    height: 5rem;
+    position: sticky;
+    z-index: 200;
+    top: 0;
+    width: 100%;
+}
+
+.navbar-logo img {
+    /* float: right; */
+    /* text-align: center; */
+    padding: 14px 20px;
+    height: auto;
+    width: auto;
+    max-height: 72px;
+    max-width: 300px;
+
+}
+
+
+.navbar-right a {
+    font-family: "Jost", sans-serif;
+    font-weight: bold;
+    font-size: 19px;
+    text-align: center;
+    color: #ffffff;
+    border-color: #e6e6e6;
+
+    padding-left: 15px;
+    padding-right: 35px;
+    text-decoration: none;
+}
+
+/* Dropdown Button */
+.dropbtn {
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+}
+
+/* The container <div> - needed to position the dropdown content */
+/* .dropdown {
+    position: relative;
+    display: inline-block;
+} */
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 999;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+    color: #3e8e41;
+}
+
+/* 
+.dropdown:hover .dropdown-menu {
+    display: block;
+} */
+
+
+/* .dropdown {
+    margin-left: 40rem;
+    margin-right: 40rem;
+
+} */
+
+/* .btn {
+    background-color: green;
+}
+
+.name {
+    text-align: center;
+    color: green;
+} */
+
+/* .navbar-toggler {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.top-row {
+    height: 3.5rem;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.navbar-brand {
+    font-size: 1.1rem;
+}
+
+.oi {
+    width: 2rem;
+    font-size: 1.1rem;
+    vertical-align: text-top;
+    top: -2px;
+}
+
+.nav-item {
+    font-size: 0.9rem;
+    padding-bottom: 0.5rem;
+}
+
+    .nav-item:first-of-type {
+        padding-top: 1rem;
+    }
+
+    .nav-item:last-of-type {
+        padding-bottom: 1rem;
+    }
+
+    .nav-item ::deep a {
+        color: #d7d7d7;
+        border-radius: 4px;
+        height: 3rem;
+        display: flex;
+        align-items: center;
+        line-height: 3rem;
+    }
+
+.nav-item ::deep a.active {
+    background-color: rgba(255,255,255,0.25);
+    color: white;
+}
+
+.nav-item ::deep a:hover {
+    background-color: rgba(255,255,255,0.1);
+    color: white;
+}
+
+@media (min-width: 641px) {
+    .navbar-toggler {
+        display: none;
+    }
+
+    .collapse {
+        
+        display: block;
+    }
+    
+    .nav-scrollable {
+        
+        height: calc(100vh - 3.5rem);
+        overflow-y: auto;
+    }
+} */
+/* .menu-button {
+    background-color: #E91E62;
+    border: 1px;
+    border-radius: 3px;
+    -webkit-box-shadow: 1px 1px 0px 0px #2f2f2f;
+    -moz-box-shadow: 1px 1px 0px 0px #2f2f2f;
+    box-shadow: 1px 1px 0px 0px #2f2f2f;
+}
+
+.menu-button a,
+.menu-button a:hover,
+.menu-button a:active {
+    color: #fff !important;
+}
+
+.menu-button2 {
+    background-color: #E91E62;
+    border: 1px;
+    border-radius: 3px;
+    -webkit-box-shadow: 1px 1px 0px 0px #2f2f2f;
+    -moz-box-shadow: 1px 1px 0px 0px #2f2f2f;
+    box-shadow: 1px 1px 0px 0px #2f2f2f;
+}
+
+.menu-button2 a,
+.menu-button2 a:hover,
+.menu-button a:active {
+    color: #fff !important;
+} */

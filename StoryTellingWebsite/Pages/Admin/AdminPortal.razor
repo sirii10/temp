@@ -1,0 +1,143 @@
+﻿
+@using SqlAccessLibrary
+@using SqlAccessLibrary.SQL
+@inject UploadStatusService uploadStatusService
+
+<PageTitle>Admin Portal Page</PageTitle>
+<AuthorizeView Roles="performer">
+    <Authorized >
+
+        <!-- Main Content -->
+        <div class="content">
+            <header class="admin-header">
+                <h1>Welcome, Admin!</h1>
+                @*<button class="logout-btn" @onclick="Logout">Logout</button>*@
+            </header>
+
+            <div class="main-section">
+                <h2>Overview</h2>
+                <p>Here is a quick overview of the latest statistics and updates.</p>
+
+                <div class="stats-grid">
+                    <div class="card">
+                        <h3>New Uploads</h3>
+                        <table class="table table-striped table-hover table-bordered">
+                            <thead class="table-dark">
+                            <tr>
+                                <th>ID</th>
+                                <th>Last Updated</th>
+                                <th>File Name</th>
+                            </tr>
+                            </thead>
+                            <tbody style="overflow-x: auto;">
+                            @if (_NewuploadStatusList != null && _NewuploadStatusList.Any())
+                            {
+                            foreach (var item in _NewuploadStatusList)
+                            {
+                            <tr>
+                                <td>@item.Id</td>
+                                <td>@item.Last_Updated</td>
+                                <td>@item.FileName</td>
+                            </tr>
+                            }
+                            }
+                            else
+                            {
+                            <tr>
+                                <td colspan="3" style="text-align: center;">No data available</td>
+                            </tr>
+                            }
+                            </tbody>
+                            
+                        </table>
+
+                    </div>
+                    @*<div class="card">
+                        <h3>Pending Uploads</h3>
+                        <p>@ActiveSessions</p>
+                    </div>*@
+                    <div class="card">
+                        <h3>Complete Uploads</h3>
+                        <table class="table table-striped table-hover table-bordered">
+                            <thead class="table-dark">
+                            <tr>
+                                <th>ID</th>
+                                <th>Last Updated</th>
+                                <th>File Name</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @if (_CompleteduploadStatusList != null && _CompleteduploadStatusList.Any())
+                            {
+                            foreach (var item in _CompleteduploadStatusList)
+                            {
+                            <tr>
+                                <td>@item.Id</td>
+                                <td>@item.Last_Updated</td>
+                                <td>@item.FileName</td>
+                            </tr>
+                            }
+                            }
+                            else
+                            {
+                            <tr>
+                                <td colspan="3" style="text-align: center;">No data available</td>
+                            </tr>
+                            }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </Authorized>
+    <NotAuthorized>
+        <h1>Sorry, you dont have access!</h1>
+    </NotAuthorized>
+</AuthorizeView>
+
+
+
+@code {
+    [CascadingParameter]
+    private Task<AuthenticationState> authenticationState { get; set; }
+    
+    private int UserCount = 123;         // Replace with dynamic data
+    private int ActiveSessions = 45;    // Replace with dynamic data
+    private int PendingTasks = 10;      // Replace with dynamic data
+    private List<UploadStatus> _NewuploadStatusList = new List<UploadStatus>();
+    private List<UploadStatus> _PendinguploadStatusList = new List<UploadStatus>();
+
+    private List<UploadStatus> _CompleteduploadStatusList = new List<UploadStatus>();
+
+
+    
+    protected override async Task OnInitializedAsync()
+    {
+        List<UploadStatus>  uploadStatus= (await uploadStatusService.GetAllUpdateStatus());
+        if (uploadStatus != null)
+        {
+            foreach (UploadStatus status in uploadStatus)
+            {
+                if (status.Status == "NEW")
+                {
+                    _NewuploadStatusList.Add(status);
+                }
+                else if (status.Status == "PENDING")
+                {
+                    _PendinguploadStatusList.Add(status);
+                }
+                else
+                {
+                    _CompleteduploadStatusList.Add(status);
+                }
+            }
+        }
+
+    }
+    private void Logout()
+    {
+        // Implement logout logic
+        Console.WriteLine("Logged out.");
+    }
+}

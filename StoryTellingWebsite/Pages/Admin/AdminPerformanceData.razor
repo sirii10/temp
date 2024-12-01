@@ -1,0 +1,116 @@
+﻿@page "/AdminPortal/PerformaceData"
+@using System.Text
+@using Microsoft.IdentityModel.Tokens
+@using MudBlazor.Extensions
+@using SqlAccessLibrary
+@using SqlAccessLibrary.SQL
+@inject PerformanceService performanceService
+
+<!-- Main Content -->
+<div class="content">
+    <header class="admin-header">
+        <h3>List of Performances: </h3>
+        <button class="btn-primary"><a href="/AddPerformanceForm">Add Performance</a></button>
+    </header>
+
+    <div class="main-section">
+        <div class="stats-grid">
+            <div class="card">
+                <table class="table table-striped table-hover table-bordered">
+                    <thead class="table-dark">
+                    <tr>
+                        <th>Start Date</th>
+                        @*<th>End Date</th>
+                        <th>Start Time</th>
+                        <th>Duration</th>
+                        <th>Venue</th>*@
+                        <th>Title</th>
+                        @*<th>Type</th>*@
+                        <th>Description</th>
+                        <th>Recordings</th>
+                        <th>Performers</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @if (performanceList != null && performanceList.Count > 0)
+                    {
+                    foreach (var item in performanceList)
+                    {
+                        @if (!item.StartDate.ToString().IsNullOrEmpty() && !item.Name.IsNullOrEmpty())
+                        {
+                            <tr>
+                                <td>@item.StartDate</td>
+                                @*<td>@item.EndDate</td>
+                                <td>@item.StartTime</td>
+                                <td>@item.EndTime - @item.StartTime</td>
+                                <td></td>*@
+                                <td>@item.Name</td>
+                                @*<td></td>*@
+                                <td>@item.Description</td>
+                                <td>@performanceRecordingList(@item.PerformanceRecordings.ToList())</td>
+                                <td>@performerList(@item.PerformancePerformers.ToList())</td>
+                            </tr>
+                            
+                        }
+                    }
+                    }
+                    else
+                    {
+                    <tr>
+                        <td colspan="3" style="text-align: center;">No data available</td>
+                    </tr>
+                    }
+                    </tbody>
+
+                </table>
+
+            </div>
+            
+        </div>
+    </div>
+</div>
+@code
+{
+    List<Performance> performanceList { get; set; } = null;
+    protected override async Task OnInitializedAsync()
+    {
+        performanceList = await performanceService.GetPerformanceList();
+        Console.WriteLine(performanceList);
+    }
+
+    private string performanceRecordingList(List<PerformanceRecording> performanceRecordings)
+    {
+        if (performanceRecordings.Count > 0)
+        {
+            string recording = performanceRecordings[0].RecordingPath;
+            return recording;
+        }
+
+        return "";
+    }
+
+    private string performerList(List<PerformancePerformer> performancePerformers) //better lofic for concatentation
+    {
+        StringBuilder stringBuilder = new StringBuilder();
+        foreach (var performers in performancePerformers)
+        {
+           List<PerformerName> performerNames= performers.Performer.PerformerNames.ToList();
+           if (performerNames.Count > 0)
+           {
+               PerformerName pName = performerNames[0];
+               string performerFullName = pName.FirstName + " " + pName.MiddleName + " "+ pName.LastName;
+              
+               if (!performerFullName.IsNullOrEmpty() && !performerFullName.Equals("  ")) 
+               {
+                   stringBuilder.Append(performerFullName);
+                   stringBuilder.Append(" , "); 
+               } 
+           }
+        }
+
+        stringBuilder.Length--;
+        stringBuilder.Length--;
+        stringBuilder.Length--;
+        return stringBuilder.ToString();
+    }
+}

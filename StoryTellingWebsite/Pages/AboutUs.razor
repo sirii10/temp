@@ -1,0 +1,215 @@
+@page "/about-us"
+@using SqlAccessLibrary
+@using SqlAccessLibrary.SQL
+@inject AboutPageService aboutPageService
+@inject PageService pageService
+
+<PageTitle>About Us</PageTitle>
+
+@if (aboutPage != null)
+{
+    <section class="body-main">
+        <div class="container">
+            <div class="main-head">
+                <h1>@aboutPage.Heading</h1>
+                <h6>@aboutPage.Subheading</h6>
+            </div>
+            <div class="main-video">
+                <iframe style="width: 100%!important; height: 500px!important;"
+                src=@aboutPage.VideoLink
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
+            </div>
+        </div>
+
+    </section>
+    <section class="body-p">
+        <div class="container">
+            <div class="row">
+                @foreach (var article in articles)
+                {
+                    <div class="col-md-4">
+                        <h5 class="card-title">@article.PostTitle</h5>
+                        <div class="card" style="width: 23rem;">
+                            <img src=@article.ArticleImages.First().ImageDir class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <p class="card-text">
+                                    @article.PostExcerpt
+                                </p>
+                                <a href="#">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+    <section class="our-story">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="story-img">
+                    <img src="images/ourstory.jpg" alt="">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="collapse-layer">
+                    <div class="row border-bottom">
+                        <p>
+                            <a data-bs-toggle="collapse" href="#multiCollapseExample1" aria-expanded="false"
+                                aria-controls="multiCollapseExample1">
+                               <span style="font-size: 30px; font-weight: 600; color:#0000cd;"> + </span> Our Story
+                            </a>
+
+                        </p>
+                        <div class="collapse in show" id="multiCollapseExample1">
+                            <div class="card card-body" aria-expanded="true"> <p>On a warm October day in
+                                1973, the town
+                                of Jonesborough hosted the first National
+                                Storytelling
+                                Festival. The first event of its kind anywhere in the world, the Festival ignited a
+                                renaissance.
+                                People around the world have since rediscovered the power of a story well told from
+                                the
+                                storytelling capital of the world.</p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row border-bottom">
+                        <p>
+                            <a data-bs-toggle="collapse" href="#multiCollapseExample2" aria-expanded="false"
+                                aria-controls="multiCollapseExample2">
+                                <span style="font-size: 30px; font-weight: 600; color:#0000cd;"> + </span> Our Vision
+                            </a>
+
+                        </p>
+                        <div class="collapse multi-collapse" id="multiCollapseExample2">
+                            <div class="card card-body">
+                                <h3>Our vision is a better life, a better world, through the power of storytelling.</h3>
+                                <p>We live in a complex age—an era of social, economic, and civic challenges. Although
+                                    concerned and dedicated individuals, organizations, and government agencies are
+                                    addressing these challenges, the issues remain daunting.
+
+                                    Storytelling can’t directly feed the hungry, house the homeless, or cure the sick.
+                                    Yet,
+                                    we all have the capacity to tap into our stories, our narrative assets, and
+                                    communicate
+                                    more effectively.
+
+                                    A well-told story can communicate truth, concept, or idea with immeasurable power.
+                                    ISC
+                                    is dedicated to connecting this powerful tool with the voices of individuals,
+                                    organizations, and communities across the world to help them achieve their goals.
+
+                                    To achieve this worthy vision, ISC is advancing the power and possibilities of
+                                    storytelling and providing people across the world with the knowledge, experiences,
+                                    and
+                                    tools to effectively tap into the contemporary applications of this longstanding
+                                    tradition.
+
+                                    Check Out our Story in Progress.</p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row border-bottom">
+                        <p>
+                            <a data-bs-toggle="collapse" href="#multiCollapseExample3" aria-expanded="false"
+                                aria-controls="multiCollapseExample3">
+                               <span style="font-size: 30px; font-weight: 600; color:#0000cd;"> + </span> Financial Transparency
+                            </a>
+
+                        </p>
+                        <div class="collapse multi-collapse" id="multiCollapseExample3">
+                            <div class="card card-body">
+                                <p>The International Storytelling Center is a 501(c)(3) non- profit organization. As
+                                    such, we strive to apply a high level of transparency in all our operations and in
+                                    our relationships with our donors, partners and other stakeholders. Our commitment
+                                    to being open includes financial disclosure, responsiveness to requests for
+                                    information, and accurate representation of our policies and practices. Below you
+                                    will find our annual fiscal reporting including our IRS Form 990, and Guidestar
+                                    profile.
+
+                                    2020 IRS Form 990
+
+                                    Our Guidestar Profile</p>
+                                <img src="" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</section>
+<section class="our-history">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2">
+                <h6>2016</h6>
+            </div>
+            <div class="col-md-10">
+                <h2>Business Mastery Tony Robbins: Inspirational Advice from Accomplished Entrepreneurs</h2>
+                <h4>Palm Beach, Florida</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <h6>2017</h6>
+            </div>
+            <div class="col-md-10">
+                <h2>Confera / Content Marketing World: One of the Leading Small Business Marketing Events</h2>
+                <h4>Mega Hall, New York Square, NewYork</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <h6>2018</h6>
+            </div>
+            <div class="col-md-10">
+                <h2>Startup Grind Global Conference: Best Conference for Tech Start-Ups</h2>
+                <h4>Silicon Valley, San Francisco</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <h6>2019</h6>
+            </div>
+            <div class="col-md-10">
+                <h2>Next Gen Summit: Best Small Business Networking Event for Young People</h2>
+                <h4>Mega Hall, New York Square, NewYork</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <h6>2020</h6>
+            </div>
+            <div class="col-md-10">
+                <h2>Growth & Success Con: Best Free Virtual Small Business Conference</h2>
+                <h4>Online via Zoom</h4>
+            </div>
+        </div>
+    </div>
+</section>
+}
+
+@code{
+    List<Article> articles = new List<Article>();
+    AboutPage aboutPage; //TODO clean up null possibility
+    protected override async Task OnInitializedAsync()
+    {
+        aboutPage = await aboutPageService.GetAboutPage(1);
+        var featuredArticles = aboutPage.FeaturedArticles;
+
+        foreach (var featuredArticle in featuredArticles)
+        {
+            //todo make ArticleID Required in FeaturedArticles Table
+            articles.Add(await pageService.GetArticle((int)featuredArticle.ArticleId));
+        }
+    }
+}

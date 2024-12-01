@@ -1,0 +1,125 @@
+﻿@*
+@page "/AdminPortal/dataImport"
+
+@using SqlAccessLibrary.DataEntry
+@using System.IO.Compression
+@using System.Security.Claims
+@using SqlAccessLibrary.SQL
+@inject IWebHostEnvironment environment
+@inject ExcelImportService excelImportService
+@inject IJSRuntime js
+<h3>DataImportPage</h3>
+
+<AuthorizeView Roles="performer">
+    <Authorized >
+        $1$<h1>Hello, @context.User.FindFirst(ClaimTypes.Role)?.Value!</h1>#1#
+        <MudText>Enter the path of your .zip containing a properly formatted excel sheet</MudText>
+        <InputFile OnChange="HandleFileUpload" accept=".zip,application/zip" />
+    </Authorized>
+    <NotAuthorized>
+        <h1>Sorry, you dont have access!</h1>
+    </NotAuthorized>
+</AuthorizeView>
+
+
+@code {
+    [CascadingParameter]
+    private Task<AuthenticationState> authenticationState { get; set; }
+
+    string message = "";
+    
+    /*protected override async Task OnInitializedAsync()
+    {
+        var authState = await authenticationState;
+        if (authState.User.Claims.ToList().Count >= 2)
+        {
+            message = $"Hello {authState.User.Claims.ToList()[1].Value}";
+
+        }
+        else
+        {
+            message = $"Hello {authState.User.Identity.Name}";
+  
+        }
+    }*/
+    
+    private const long MaxFileSize = 5L * 1024 * 1024 * 1024; // 5 GB in bytes
+    private string excelFilePath = "";
+    
+    private async Task HandleFileUpload(InputFileChangeEventArgs e)
+    {
+   
+        var file = e.File;
+
+        if (file != null && file.ContentType == "application/x-zip-compressed")
+        {
+            var uploadDirName = Path.Combine(environment.WebRootPath, "uploads");
+            Directory.CreateDirectory(uploadDirName);
+            var zipFileDestination = Path.Combine(uploadDirName, file.Name);
+
+            using (var stream = file.OpenReadStream(MaxFileSize))
+            {
+                using (var fs = new FileStream(zipFileDestination, FileMode.Create))
+                {
+                    await stream.CopyToAsync(fs);
+                }
+            }
+
+            var tempdir = Path.Combine(uploadDirName, Guid.NewGuid().ToString());
+            var excelFile = await UnzipFileAsync(zipFileDestination, tempdir);
+
+            File.Delete(zipFileDestination);
+
+            if(excelFile != null)
+            {
+                excelImportService.ImportExcel(excelFile);
+                Directory.Delete(tempdir, true);
+            }
+        }
+    }
+
+    private void ImportExcelDoc()
+    {
+        if (!string.IsNullOrEmpty(excelFilePath) && File.Exists(excelFilePath))
+        {
+            excelImportService.ImportExcel(excelFilePath);
+        }
+    }
+
+    public static async Task<string?> UnzipFileAsync(string zipFilePath, string extractPath)
+    {
+        string excelPath = null;
+        Directory.CreateDirectory(extractPath);  
+  
+        using (var zipStream = new FileStream(zipFilePath, FileMode.Open))  
+        using (var zipArchive = new ZipArchive(zipStream, ZipArchiveMode.Read))  
+        {  
+            foreach (var entry in zipArchive.Entries)  
+            {  
+                var destinationPath = Path.Combine(extractPath, entry.FullName);  
+
+                if (excelPath == null && entry.Name.EndsWith(".xlsx"))//TODO: take first excel file in .zip, may need to be more robust
+                {
+                    excelPath = destinationPath;
+                }
+
+                if (string.IsNullOrEmpty(entry.Name))  
+                {  
+                    Directory.CreateDirectory(destinationPath);  
+                    continue;  
+                }  
+  
+                Directory.CreateDirectory(Path.GetDirectoryName(destinationPath));  
+  
+                using (var entryStream = entry.Open())  
+                using (var extractedFileStream = new FileStream(destinationPath, FileMode.Create, FileAccess.Write, FileShare.None))  
+                {  
+                    await entryStream.CopyToAsync(extractedFileStream);  
+                }  
+
+            }  
+        }  
+        return excelPath;
+    }  
+}
+*@

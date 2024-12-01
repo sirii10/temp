@@ -1,0 +1,74 @@
+﻿<div class="navbar">
+    <div class="navbar-logo">
+        <img src="images/storytellers-logo_old.png" alt="">
+
+    </div>
+    <div class="navbar-right">
+        @* <div class="dropdown">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+        data-bs-toggle="dropdown" aria-expanded="false">
+        About Us
+        </a>
+
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <li><a class="dropdown-item" href="#">
+        Action
+        </a>
+        </li>
+        <li><a class="dropdown-item" href="#">
+        Another action
+        </a>
+        </li>
+        <li><a class="dropdown-item" href="#">
+        Something else here
+        </a>
+        </li>
+        </ul>
+        <a href="/festival/">Festival</a>
+        <a href="/stories/">Stories</a>
+        <a href="/contact-us/">Contact Us</a>
+        <a href="/contact-us/">Search</a>
+        <a href="/register/">Register</a>
+        <a href="/login/">Login</a>
+        </div> *@
+        <div class="dropdown">
+            <a class="dropbtn">Dropdown</a>
+            <div class="dropdown-content">
+                <a href="#">Link 1</a>
+                <a href="#">Link 2</a>
+                <a href="#">Link 3</a>
+            </div>
+        </div>
+
+
+
+
+    </div>
+</div>
+@* <script>
+$(document).ready(function ()
+{
+$('.dropdown').hover(function ()
+{
+$(this).find('.dropdown-menu')
+.stop(true, true).delay(100).fadeIn(200);
+}, function ()
+{
+$(this).find('.dropdown-menu')
+.stop(true, true).delay(100).fadeOut(200);
+});
+});
+</script> *@
+
+
+
+@* @code {
+private bool collapseNavMenu = true;
+
+private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+private void ToggleNavMenu()
+{
+collapseNavMenu = !collapseNavMenu;
+}
+} *@

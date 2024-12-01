@@ -1,0 +1,242 @@
+﻿@page "/search"
+@using SqlAccessLibrary
+@using SqlAccessLibrary.SQL
+@using SqlAccessLibrary.ExtensionMethods
+@inject PageService pageService
+@inject EventService eventService
+@inject PerformanceService performanceService
+@inject UserService userService
+@inject ArchiveSearchService archiveSearchservice
+
+
+<div class="searchPage">
+@* <div class="container"> *@
+<div class="row">
+    <div class="column left">
+          <div class="search-sidebar">
+           <h3>Advanced Search</h3>
+            <MudTreeView MultiSelection="true" Class="pa-4" Style="@($"height: 100vh; background:#2c3e50; color:{Colors.Indigo.Lighten5};")" @bind-SelectedValues="SelectedValues">
+                <MudTreeViewItem Value="@("Performance")">
+                </MudTreeViewItem>
+                <MudTreeViewItem Value="@("Event")">
+                </MudTreeViewItem>
+                <MudTreeViewItem Value="@("Performer")">
+                </MudTreeViewItem>
+            </MudTreeView> 
+        </div> 
+    </div>
+
+    <div class="column right">
+        <MudStack Row Spacing=0>
+            <MudTextField @bind-Value="@SearchTerm" Label="Search" Variant="Variant.Outlined" OnKeyDown="SearchEnterPress"/>
+            <MudButton Diabled="@_searching" OnClick="Search" Variant="Variant.Filled" Style="background-color:#2c3e50;" EndIcon="@Icons.Material.Filled.Search" Color="Color.Primary"></MudButton>
+        </MudStack>
+        <div class="search-results">
+            @if (_hasAttemptedSearch)
+            {
+                <h3>Search Results for: "@SearchTerm"</h3>
+                if(_searching)
+                {
+                    <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="my-7" />
+                }
+                else if(SearchResults.Count == 0)
+                {
+                    <h4>"@SearchTerm" did not yield any results</h4>
+                }
+                else
+                {
+                    <div class="searchBox">
+                        @foreach (ISearchable searchable in SearchResults)
+                        {
+                            switch(searchable)
+                            {
+                                case Event ev:
+                                    <div class="container">
+                                        <div>
+                                            <a class="nav-link" href="event/@ev.EventId/@ev.Name">
+                                                <div class="link">
+                                                    <h4>@ev.Name</h4>
+                                                    <div>
+                                                        <p>@ev.Description</p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    break;
+                                case Performance performance:
+                                    <div class="container">
+                                        <a class="nav-link" href="performance/@performance.PerformanceId/@performance.Name">
+                                            <div class="link">
+                                                <h4>@performance.Name</h4>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    break;
+                                case Performer performer:
+                                    <div class="container">
+                                        <div>
+                                            <h4>@performer.PerformerNames.FirstOrDefault()?.GetFullPerformerName()</h4>
+                                            <div>
+                                                @if (performer.PerformerImages.Any())
+                                                {
+                                                    <img src=@performer.PerformerImages.First().ImagePath alt="">
+                                                }
+                                            </div>
+                                            @if (performer.PerformerBiographies.Any())
+                                            {
+                                                <p>@performer.PerformerBiographies.First().Biography</p>
+                                            }
+                                        </div>
+                                    </div>
+                                    break;
+                            }
+                        }
+                    </div>
+                }
+
+                    }
+                    else
+                    {
+                        <h6>Enter a search term above to search the archive for Performances, Events, and Performers</h6>
+                    }
+                </div>
+            </div>
+
+        </div>
+</div>
+
+@code {
+    public string SearchTerm { get; set; } = string.Empty;
+    public List<ISearchable> SearchResults = new();
+
+    HashSet<string> SelectedValues { get; set; }
+
+    bool _searching = false;
+    bool _hasAttemptedSearch = false;
+
+    async Task SearchEnterPress(KeyboardEventArgs e)
+    {
+        if (e.Code == "Enter" || e.Code == "NumpadEnter")
+        {
+            await Task.Delay(10);
+            await Search();
+        }
+    }
+
+    async Task Search()
+    {
+        _hasAttemptedSearch = true;
+        _searching = true;
+
+        SearchResults.Clear();
+
+        var performanceResultDictionry = new Dictionary<int, PerformanceSearchResult>();
+        var performerResultDictionary = new Dictionary<int, PerformerSearchResult>();
+        var eventResults = new List<EventSearchResult>();
+
+
+        var query = SelectedValues.Count == 0 ? new SearchQuery() : new SearchQuery(SelectedValues.Contains("Performer"), SelectedValues.Contains("Performance"), SelectedValues.Contains("Event"));
+        if (query.Performances)
+        {
+            AddToPerformanceDictionaryByRelevance(performanceResultDictionry, archiveSearchservice.SearchPerformanceNamesWithRelevance(SearchTerm));
+            AddToPerformanceDictionaryByRelevance(performanceResultDictionry, archiveSearchservice.SearchTranscriptionsWithRelevance(SearchTerm));
+        }
+        if (query.Performers)
+        {
+            AddToPerformerDictionaryByRelevance(performerResultDictionary, archiveSearchservice.SearchPerformerBiographiesWithRelevance(SearchTerm));
+            AddToPerformerDictionaryByRelevance(performerResultDictionary, archiveSearchservice.SearchPerformerNamesWithRelevance(SearchTerm));
+        }
+        if (query.Events)
+        {
+            eventResults = archiveSearchservice.SearchEventsWithRelevance(SearchTerm);
+        }
+
+        List<SearchResult> AllSearchResults = new List<SearchResult>();
+        foreach(var performanceResult in performanceResultDictionry.Values)
+        {
+            AllSearchResults.Add(performanceResult);
+        }
+        foreach (var performerResult in performerResultDictionary.Values)
+        {
+            AllSearchResults.Add(performerResult);
+        }
+        foreach (var eventResult in eventResults)
+        {
+            AllSearchResults.Add(eventResult);
+        }
+
+        foreach(SearchResult result in AllSearchResults.OrderBy(p => p.relevance))
+        {
+            switch(result)
+            {
+                case PerformanceSearchResult performanceSearchResult:
+                    SearchResults.Add(await performanceService.GetPerformance(performanceSearchResult.performance_id));
+                    break;
+                case PerformerSearchResult performerSearchResult:
+                    SearchResults.Add(await performanceService.GetPerformer(performerSearchResult.performer_id));
+                    break;
+                case EventSearchResult eventSearchResult:
+                    SearchResults.Add(await eventService.GetEvent(eventSearchResult.event_id));
+                    break;
+            }
+        }
+
+        _searching = false;
+    }
+
+    private void AddToPerformanceDictionaryByRelevance(Dictionary<int, PerformanceSearchResult> resultDictionary, List<PerformanceSearchResult> searchResults)
+    {
+        foreach (PerformanceSearchResult result in searchResults)
+        {
+            if (resultDictionary.ContainsKey((int)result.performance_id) == false)
+            {
+                resultDictionary[(int)result.performance_id] = result;
+                continue;
+            }
+            if (resultDictionary[(int)result.performance_id].relevance < result.relevance)
+            {
+                resultDictionary[(int)result.performance_id] = result;
+            }
+        }
+    }
+
+    private void AddToPerformerDictionaryByRelevance(Dictionary<int, PerformerSearchResult> resultDictionary, List<PerformerSearchResult> searchResults)
+    {
+        foreach(PerformerSearchResult result in searchResults)
+        {
+            if (result.performer_id == null)
+                continue;
+            if (resultDictionary.ContainsKey((int)result.performer_id) == false)
+            {
+                resultDictionary[(int)result.performer_id] = result;
+                continue;
+            }
+            if(resultDictionary[(int)result.performer_id].relevance < result.relevance)
+            {
+                resultDictionary[(int)result.performer_id] = result;
+            }
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+    }
+
+    struct SearchQuery
+    {
+        public SearchQuery()
+        {
+            
+        }
+        public SearchQuery(bool performers, bool performances, bool events)
+        {
+            Performers = performers;
+            Performances = performances;
+            Events = events;
+        }
+        public bool Performers { get; set; } = true;
+        public bool Performances { get; set; } = true;
+        public bool Events { get; set; } = true;
+    }
+}

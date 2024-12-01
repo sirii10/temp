@@ -1,0 +1,84 @@
+﻿@using System.Text.RegularExpressions
+@using SqlAccessLibrary
+@using SqlAccessLibrary.SQL
+
+@page "/performance/{PId}/{PerformanceName}"
+@inject PerformanceService performanceService
+
+<MudPaper Class="d-flex flex-grow-1 pa-4 shadow-lg">
+    <MudPaper Class="py-8" Elevation="0">
+        <h1>@PerformanceName</h1>
+    </MudPaper>
+
+    <MudPaper Class="d-flex flex-grow-1 py-8 justify-content-end" Elevation="0">
+    @if(RecordingPath != null)
+    {
+        <audio controls="controls" style="transform: scale(1);">
+            <source src="@RecordingPath" type="audio/mp3">
+        </audio>
+    }
+    else
+    {
+        <p>This performance has no Audio Recordings.</p>
+    }
+    </MudPaper>
+</MudPaper>
+<MudPaper Class="d-flex flex-grow-1 pa-4 m-2 overflow-y-scroll shadow">
+        <MudText Typo="Typo.body1">
+        @if(Transcription!= null)
+        {
+            @((MarkupString)Transcription)
+        }
+        else
+        {
+            <p>This performance has no Trascriptions.</p>
+        }
+    </MudText>
+</MudPaper>
+
+@code {
+    [Parameter]
+    public string PerformanceName { get; set; }
+    [Parameter]
+    public string PId { get; set; }
+    public Performance SelectedPerformance;
+    public string? RecordingPath;
+    public string? Transcription;
+
+    protected override async Task OnInitializedAsync()
+    {
+        //TODO: This needs better logic to scan through lists of recordings and transcriptions
+        SelectedPerformance = await performanceService.GetPerformance((await performanceService.GetAllPerformances()).First(p => p.PerformanceId == Int32.Parse(PId)).PerformanceId);
+        if(SelectedPerformance.PerformanceRecordings.Count == 0)
+            return;
+
+        var firstRecording = await performanceService.GetPerformanceRecording(SelectedPerformance.PerformanceRecordings.First().PerformanceRecordingId);
+        if (firstRecording?.TranscriptionRecordings.Count == 0)
+            return;
+
+        var firstTranscriptionRecording = await performanceService.GetTranscriptionRecording(firstRecording.TranscriptionRecordings.First().TranscriptionRecordingId);
+
+        //TODO: unsafe casts
+        var performanceRecording = await performanceService.GetPerformanceRecording((int)firstTranscriptionRecording.PerformanceRecordingId);
+        var transcription = await performanceService.GetTranscriptionSRT((int)firstTranscriptionRecording.TranscriptionId);
+
+        RecordingPath = performanceRecording?.RecordingPath;
+        
+        Transcription = transcription?.LineByLine;
+       
+
+        // Replace newlines with <br /> (if any)
+        Transcription = Regex.Replace(Transcription, @" +", " ");
+
+        // Replace occurrences with proper breaks
+        string formattedOutput = Regex.Replace(Transcription, @"(\[\d+(\.\d+)? - \d+(\.\d+)?\] [A-Za-z ]+[^\.?!]*[\.?!])", "$1<br />").Trim();
+
+        // Remove extra spaces before <br />
+        formattedOutput = Regex.Replace(formattedOutput, @"\s*<br\s*/?>", "<br />");
+    
+
+        // Trim the output to remove any trailing spaces/newlines
+        Transcription = formattedOutput;
+
+    }
+}

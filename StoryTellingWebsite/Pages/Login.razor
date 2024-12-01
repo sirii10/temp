@@ -1,0 +1,138 @@
+@page "/login"
+
+@inject NavigationManager navigationManager;
+@using System.Security.Claims
+@using Google.Protobuf.WellKnownTypes
+@using Microsoft.AspNetCore.Authentication
+@using Microsoft.AspNetCore.Authentication.Cookies
+@using SqlAccessLibrary
+@using SqlAccessLibrary.SQL
+@using StoryTellingWebsite.Authentication
+
+
+@inject AuthenticationStateProvider authStateProvider
+
+
+@inject UserService userService;
+<PageTitle>Login</PageTitle>
+
+@*<section class="festival-schedule">
+    <div class="container">
+        <div class="festival-schedule-content">
+            <h2>Log In
+            </h2>
+
+        </div>
+    </div>
+</section>*@
+<section class="login" style="text-align: center;">
+    <div class="container">
+        <div class="login-form">
+                <form class="form" >
+                <!-- Email input -->
+                <div class="card" style="width: 27rem; text-align:center;">
+                    <h5>Log In</h5>
+                        <div data-mdb-input-init class="form-outline mb-3">
+                            <input @bind-value ="Username" type="text" id="form1Example1" class="form-control" placeholder="Email address" />
+                           
+                        </div>
+
+                        <!-- Password input -->
+                        <div data-mdb-input-init class="form-outline mb-3">
+                            <input @bind-value = "Password" type="password" id="form2Example2" class="form-control" placeholder="Password" />
+                           
+                        </div>
+
+                        <!-- 2 column grid layout for inline styling -->
+                        <div class="row mb-4">
+                            <div class="col d-flex justify-content-center">
+                            <!-- Checkbox -->
+                            <div class="form-check">
+                                @*
+                                <input class="form-check-input" type="checkbox" value="" id="form2Example31" checked />
+                                *@
+                                @*<label class="form-check-label" for="form2Example31"> Remember me </label>*@
+                                <label class="form-check-label" for="form2Example31" style="color: red;"> @errorMessage </label>
+                            </div>
+                            </div>
+
+                            <div class="col">
+                            <!-- Simple link -->
+                            <a href="#!">Forgot password?</a>
+                            </div>
+                        </div>
+
+                        <!-- Submit button -->
+                        <button type="button" @onclick="Authenticate" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-4">Log In</button>
+
+                        <!-- Register buttons -->
+                        <div class="text-center">
+                            <p>Not a member? <a href="#!">Register</a></p>
+                            <p>or sign up with:</p>
+                            <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-link btn-floating mx-1">
+                            <i class="fab fa-facebook-f">Facebook</i>
+                            </button>
+
+                            <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-link btn-floating mx-1">
+                            <i class="fab fa-google">Google</i>
+                            </button>
+                        </div>
+                    </div>
+                
+                </form>
+        </div>
+    </div>
+
+</section>
+
+<section class="support-donation">
+    <div class="container" id="donation-background">
+        <div class="donation-content">
+            <h2>
+                Please consider supporting our work.
+            </h2>
+            <p>
+                Click one of the buttons below to learn more about<br>
+                opportunities for sponsorship, donating or volunteering.
+            </p>
+            <a class="support-btn" href="">sponsor</a>
+            <a class="support-btn" href="">donate</a>
+            <a class="support-btn" href="">volunteer</a>
+        </div>
+    </div>
+</section>
+
+@code
+{
+    [CascadingParameter] public HttpContext? HttpContext { get; set; } = default;
+    
+    public string Username { get; set; } = String.Empty;
+    public string Password { get; set; } = String.Empty;
+
+    private string? errorMessage;
+
+    
+
+private async Task Authenticate()
+{
+    //ToDo: Password encryption needed
+    var userAccount = await userService.GetUser(Username, Password);
+    if (userAccount == null )
+    {
+        errorMessage = "Invalid User Name or Password";
+        return;
+    }
+    
+    var customAuthStateProvider = (CustomAuthenticationStateProvider)authStateProvider;
+    await customAuthStateProvider.UpdateAuthenticationState(new UserSession
+    {
+        UserName = userAccount.UserLogin,
+        Role = userAccount.UserRoles.ToList()[0].Role.Name
+        /*
+        Role = "admin"
+        */
+
+    });
+    navigationManager.NavigateTo("/", true);
+}
+}

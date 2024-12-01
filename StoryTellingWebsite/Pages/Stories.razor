@@ -1,0 +1,77 @@
+@page "/stories"
+@using SqlAccessLibrary
+@using SqlAccessLibrary.SQL
+@inject PageService pageService
+
+<PageTitle>Stories</PageTitle>
+
+<section class="new-era">
+    <div class="container">
+        <div class="new-era-head">
+            <h1>A New Era of Storytelling</h1>
+            <h6>We’re always looking for new ways to share our story as an organization. Consider this your
+                one-stop-shop for
+                official announcements, upcoming events, our President’s travel diaries, industry news, archival
+                recordings from
+                our tellers, and more.<br><br>
+
+                Want a quick hit of “just the facts”? The News page is where we keep you informed about what’s going on
+                at ISC.
+                If you have a few extra minutes for a more leisurely read, we recommend the ISC Blog, which is where we
+                keep
+                dispatches from our President, features on special ISC projects, and our digital publication Stories in
+                Motion,
+                which examines storytelling in the context of other disciplines. We’ve also recently launched a new
+                podcast,
+                StoryVault, where we’ll highlight vintage performances from some of our most beloved storytellers.
+                <br><br>
+                <span style="text-align: center;">Please check back often for updates!</span>
+            </h6>
+        </div>
+    </div>
+
+
+</section>
+<section>
+    <div class="container">
+        <hr>
+    </div>
+</section>
+<section class="president-blog">
+    <div class="container">
+        <div class="president-blog-content">
+            <h1>From the president's blog</h1>
+            <div class="row p-3">
+                @foreach (var article in articles)
+                {
+                    <div class="col-md-4">
+                        <div class="card" style="width: 22rem;">
+                            <img src=@article.ArticleImages.FirstOrDefault().ImageDir class="card-img-top" alt="..." width="500" height= "200" >
+                            <div class="card-body">
+                                <h4>@article.PostTitle</h4>
+                                <p class="card-text">@article.PostExcerpt</p>
+                                <a href="/blog/@article.PostName" class="rm-btn">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="load-more-btn"><a href="">Load More</a></div>
+        </div>
+    </div>
+</section>
+
+@code {
+    List<Article> articles = new List<Article>();
+    protected override async Task OnInitializedAsync()
+    {
+        var ids = new[] { 4, 5, 6 };
+        foreach (var id in ids)
+        {
+            var article = await pageService.GetArticle(id);
+            if (article != null)
+                articles.Add(article);
+        }
+        
+    }
+}

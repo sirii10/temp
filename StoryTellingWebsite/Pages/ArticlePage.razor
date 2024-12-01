@@ -1,0 +1,47 @@
+﻿@page "/blog/{PageName}"
+@using SqlAccessLibrary
+@using SqlAccessLibrary.SQL
+@inject PageService pageService
+
+
+@if (Article != null)
+{
+    <div class="articleDisplay">
+        <h1>@Article.PostTitle</h1>
+        <p>
+            @foreach (var image in Article.ArticleImages)
+            {
+                <img src=@image.ImageDir alt="" style="float: right; padding:15px">
+                @if (image.Description != null)
+                {
+                    <figcaption>@image.Description</figcaption>
+                }
+
+            }
+            @foreach (var paragraph in Paragraphs)
+            {
+            <p>@paragraph</p>
+            }
+        </p>
+    </div>
+}
+
+
+@code {
+    [Parameter]
+    public string PageName { get; set; }
+    public Article Article;
+    public List<string> Paragraphs = new List<string>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Article = (await pageService.GetAllArticles()).First(p => p.PostName == PageName);
+        var paragraphs = Article.PostContent.Split("\n", StringSplitOptions.TrimEntries);
+        foreach (var paragraph in paragraphs)
+        {
+            if (paragraph != String.Empty)
+                Paragraphs.Add(paragraph);
+        }
+
+    }
+}

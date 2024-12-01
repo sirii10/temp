@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MudBlazor" Version="6.19.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SqlAccessLibrary\SqlAccessLibrary.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\mp3s\" />
+    <Folder Include="wwwroot\event_programs\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\mp3s\metal-pipe-falling-sound-effect-made-with-Voicemod.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\tempDataImport\2022 ISC festival data workbook updated.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="Pages\Admin\AdminPerformanceData.razor" />
+    <AdditionalFiles Include="Pages\Admin\AdminPortal.razor" />
+    <AdditionalFiles Include="Pages\Admin\DataImportPage.razor" />
+  </ItemGroup>
+
+</Project>

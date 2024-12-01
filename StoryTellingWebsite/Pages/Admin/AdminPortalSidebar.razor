@@ -1,0 +1,33 @@
+﻿@page "/AdminPortal"
+
+<!-- Sidebar Navigation -->
+<div class="admin-portal">
+    <div class="sidebar">
+        <h2>Admin Portal</h2>
+        <ul>
+            <li><a @onclick="() => ChangeComponent(typeof(AdminPortal))">Dashboard</a></li>
+            <li><a @onclick="() => ChangeComponent(typeof(DataImportPage))">Data Import</a></li>
+            <li><a @onclick="() => ChangeComponent(typeof(AdminPerformanceData))">Performance Data</a></li>
+            @*<li><a href="/AdminPortal/reports">Reports</a></li>
+            <li><a href="/AdminPortal/settings">Settings</a></li>*@
+        </ul>
+    </div>
+    @if (currentComponent != null)
+    {
+        <DynamicComponent Type="currentComponent" />
+    }
+</div>
+@code
+{
+    private Type currentComponent;
+    private void ChangeComponent(Type componentType)
+    {
+        currentComponent = componentType;
+    }
+    protected override void OnInitialized()
+    {
+        // Set default component
+        currentComponent = typeof(AdminPortal);
+    }
+
+}

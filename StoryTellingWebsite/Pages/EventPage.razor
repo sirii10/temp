@@ -1,0 +1,45 @@
+﻿@page "/event/{EventName}"
+@using SqlAccessLibrary
+@using SqlAccessLibrary.SQL
+@inject EventService eventService
+
+<MudPaper Class="d-flex flex-grow-1 pa-4 shadow-lg">
+    <MudPaper Class="py-8" Elevation="0">
+        <h1>@EventName</h1>
+    </MudPaper>
+
+    <MudPaper Class="d-flex flex-grow-1 py-8 justify-content-center overflow-y-scroll" Elevation="0">
+        <MudText Typo="Typo.body1">
+            @if (Event != null && Event.Description != null && Event.Description != string.Empty)
+            {
+                <p>@Event.Description</p>
+            }
+            else
+            {
+                <p>This event has no description.</p>
+            }
+        </MudText>
+    </MudPaper>
+</MudPaper>
+<MudPaper Class="d-flex flex-grow-1 pa-4 m-2 overflow-y-scroll shadow" Style="height:100vh">
+    @if(Event != null && Event.ProgramPath != null && Event.ProgramPath != String.Empty)
+    {
+        <iframe src="@Event.ProgramPath" width="100%" height="1200px">
+            This browser does not support rendering pdf files. Try switching to another browser.
+        </iframe>
+    }
+</MudPaper>
+
+@code {
+    [Parameter]
+    public string EventName { get; set; }
+    public Event Event;
+    public List<string> Paragraphs = new List<string>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Event = (await eventService.GetAllEvents()).First(p => p.Name == EventName);
+        
+
+    }
+}

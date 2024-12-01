@@ -1,0 +1,120 @@
+<section class="slider-1">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 ">
+                <span class="square"></span>
+            </div>
+            <div class="col-md-4">
+                <h5>Our Speakers</h5>
+            </div>
+            <div class="col-md-4">
+                <p><a href="">View All Speakers</a></p>
+            </div>
+
+        </div>
+        <div class="carousel" data-bs-ride="carousel" id="carouselExample">
+            <div class="carousel-inner">
+                <div class="carousel-item active" id="carouselExample">
+                    <div class="col-md-3">
+                        <div class="card-body">
+                            <img src="images/billharley.jpg" alt="" class="img-fluid">
+                            <h4><a href="3">Bill Harley</a></h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item" id="carouselExample">
+                    <div class="col-md-3">
+                        <div class="card-body">
+                            <img src="images/dolores-hydock.jpg" alt="" class="img-fluid">
+                            <h4><a href="3">Dolores Hydock</a></h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item" id="carouselExample">
+                    <div class="col-md-3">
+                        <div class="card-body">
+                            <img src="images/Kevin-Kling.jpg" alt="" class="img-fluid">
+                            <h4><a href="3">Kevin Kling</a></h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item" id="carouselExample">
+                    <div class="col-md-3">
+                        <div class="card-body">
+                            <img src="images/bil-lepp.png" alt="" class="img-fluid">
+                            <h4><a href="3">Bil Lepp</a></h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item" id="carouselExample">
+                    <div class="col-md-3">
+                        <div class="card-body">
+                            <img src="images/MotokoS.png" alt="" class="img-fluid">
+                            <h4><a href="3">Motoko</a></h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item" id="carouselExample">
+                    <div class="col-md-3">
+                        <div class="card-body">
+                            <img src="images/BrigidReedyS.jpg" alt="" class="img-fluid">
+                            <h4><a href="3">Brigid Reedy</a></h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item" id="carouselExample">
+                    <div class="col-md-3">
+                        <div class="card-body">
+                            <img src="images/connie-regan-blakeS.png" alt="" class="img-fluid">
+                            <h4><a href="3">Connie Regan Blake</a></h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" data-bs-target="#carouselExample" type="button" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" data-bs-target="#carouselExample" type="button" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+    </div>
+</section>
+<script>
+    var items = document.querySelectorAll('.carousel .carousel-item');
+    console.log("item1 ", items);
+    items.forEach((e) =>
+    {
+        const slide = items.length;
+        let next = e.nextElementSibling;
+        for (var i = 0; i <= slide; i++)
+        {
+
+            if (!next)
+            {
+                next = items[0];
+            }
+            let clonechild = next.cloneNode(true);
+            e.appendChild(clonechild.children[0]);
+            next = next.nextElementSibling;
+
+        }
+    })
+    $('.carousel').carousel({
+        interval: 2000
+    })
+    $('.carousel').on('slid.bs.carousel', function (e)
+    {
+    console.log(e)
+    if (e.from == 3)
+        {
+            $('.carousel').carousel(0)
+
+        }
+        e.preventDefault()
+
+    })
+</script>

@@ -1,0 +1,53 @@
+@using SqlAccessLibrary
+@using SqlAccessLibrary.SQL
+@inject TitlePageService titlePageService
+
+@page "/featured-tellers"
+<PageTitle>Featured Tellers</PageTitle>
+
+<section class="featured-teller">
+    <div class="container">
+        <div class="featured-teller-content">
+            <h2>Featured Teller
+            </h2>
+
+        </div>
+    </div>
+</section>
+<section class="ft">
+    <div class="container">
+        <div class="ft-content">
+                <div class="row">
+            @foreach (FeaturedPerformer featuredperformer in FeaturedPerformer)
+            {
+                    <div class="col-md-4">
+                        <div class="card" style="width: 23rem;">
+                            <div class="card-body">
+                                <img src=@featuredperformer.FeaturedPerformerImagePath alt="" class="img-fluid">
+                                <h4><a href="3">@featuredperformer.PerformerName</a></h4>
+                            </div>
+                        </div>
+                    </div>
+            }
+                </div>
+        </div>
+    </div>
+</section>
+
+@code
+{
+    private List<FeaturedPerformer> FeaturedPerformer = new List<FeaturedPerformer>();
+
+    protected override async Task OnInitializedAsync()
+
+    {
+        TitlePage title = await titlePageService.GetTitlePage(1);
+        ICollection<FeaturedPerformer> featuredtellers = title.FeaturedPerformers;
+        foreach (var featuredteller in featuredtellers)
+        {
+            FeaturedPerformer.Add(featuredteller);
+        }
+ 
+    }
+    
+}
